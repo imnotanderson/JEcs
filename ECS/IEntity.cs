@@ -6,6 +6,7 @@ namespace J.ECS
 {
     public abstract class IEntity
     {
+        public ulong id;
         Dictionary<Type,IComponent> components = new Dictionary<Type, IComponent>();
         
         public IEntity AddComponent(IComponent component)
@@ -34,6 +35,16 @@ namespace J.ECS
             if(components.Count == 0)
             { return false; }
             return componentTypes.All(x => components.ContainsKey(x));
+        }
+
+        public static bool operator ==(IEntity e1, IEntity e2)
+        {
+            return e1.id == e2.id;
+        }
+
+        public static bool operator !=(IEntity e1, IEntity e2)
+        {
+            return !(e1 == e2);
         }
     }
     

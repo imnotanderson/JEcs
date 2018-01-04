@@ -7,7 +7,8 @@ namespace J.ECS
         private Msg msg = new Msg();
         private List<ISystem> systems = new List<ISystem>();
         private List<IEntity> entities = new List<IEntity>();
-
+        private ulong entityIdSeed = 0;
+        
         public void Init()
         {
             OnInit();
@@ -16,14 +17,6 @@ namespace J.ECS
 
         protected abstract void OnInit();
         protected abstract void OnStart();
-
-        public void Upt()
-        {
-            foreach (var system in systems)
-            {
-                system.Selector(entities);
-            }
-        }
 
         protected void AddSystem(object sign, ISystem system)
         {
@@ -45,6 +38,7 @@ namespace J.ECS
 
         public void AddEntity(IEntity entity)
         {
+            entity.id = entityIdSeed++;
             entities.Add(entity);
         }
 

@@ -1,4 +1,5 @@
-﻿using J.Demo.Components;
+﻿using System.Collections.Generic;
+using J.Demo.Components;
 using J.ECS;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace J.Demo.Systems
             return new Group(typeof(RotateComponent));
         }
 
-        protected override void Execute(IEntity entity, params object[] args)
+        protected override void Execute(List<IEntity> all, IEntity entity, params object[] args)
         {
             var r = entity.GetComponent<RotateComponent>();
             r.fRotate += 1;
